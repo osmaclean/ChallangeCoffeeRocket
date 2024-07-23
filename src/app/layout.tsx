@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Baloo_2, Roboto } from 'next/font/google'
 import './globals.css'
+import Header from '@/components/organisms/Header/Header'
 
 const baloo_2 = Baloo_2({
   subsets: ['latin'],
@@ -24,7 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={baloo_2.className && roboto.className}>{children}</body>
+      <body className={baloo_2.className && roboto.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
