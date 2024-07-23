@@ -91,13 +91,13 @@ export default function Hero() {
         </section>
       </div>
 
-      <div className="flex items-center justify-center flex-1">
+      <div className="flex items-center justify-end flex-1">
         <Image
           src={'/imgHero.png'}
           alt="Section Hero Image"
           width={476}
           height={360}
-          className="w-96"
+          className="w-[27rem]"
         />
       </div>
     </section>
