@@ -3,9 +3,9 @@ import { ActionTypes } from './actions'
 export interface Product {
   id: number
   name: string
-  price: string
-  qty: string
   img_path: string
+  price: number
+  qty: number
 }
 
 export interface CartProductsStateProps {
@@ -13,7 +13,7 @@ export interface CartProductsStateProps {
 }
 
 export function cartManager(cartState: CartProductsStateProps, action: any) {
-  switch (action) {
+  switch (action.type) {
     case ActionTypes.ADD_ITEM_TO_CART:
       return {
         ...cartState,

@@ -7,7 +7,7 @@ export enum ActionTypes {
   CLEAR_CART = 'CLEAR_CART',
 }
 
-export function addItemToCart(item: Product) {
+export function addItemToCartAction(item: Product) {
   return {
     type: ActionTypes.ADD_ITEM_TO_CART,
     payload: {
@@ -16,7 +16,7 @@ export function addItemToCart(item: Product) {
   }
 }
 
-export function removeItemToCart(item_id: number) {
+export function removeItemToCartAction(item_id: number) {
   return {
     type: ActionTypes.REMOVE_ITEM_TO_CART,
     payload: {
@@ -25,7 +25,7 @@ export function removeItemToCart(item_id: number) {
   }
 }
 
-export function updateCart(item_id: number, item_qty: number) {
+export function updateCartAction(item_id: number, item_qty: number) {
   return {
     type: ActionTypes.UPDATE_CART_QTY,
     payload: {
@@ -35,7 +35,7 @@ export function updateCart(item_id: number, item_qty: number) {
   }
 }
 
-export function clearCart() {
+export function clearCartAction() {
   return {
     type: ActionTypes.REMOVE_ITEM_TO_CART,
   }

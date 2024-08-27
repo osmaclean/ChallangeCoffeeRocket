@@ -1,8 +1,8 @@
-import { CoffeeProductsCardsProps } from '@/@types/interfaces'
+import { ProductProps } from '@/@types/interfaces'
 import CoffeeCardHome from '@/components/molecules/CoffeeCardHome/CoffeeCardHome'
 import React from 'react'
 
-const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
+const CoffeeProductsCards: ProductProps[] = [
   {
     id: 1,
     imgPath: '/coffee/coffee1.png',

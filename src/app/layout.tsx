@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { Baloo_2, Roboto } from 'next/font/google'
 import { CartContextProvider } from '@/context/CartContext'
+import { ToastContainer } from 'react-toastify'
 import Header from '@/components/organisms/Header/Header'
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 const baloo_2 = Baloo_2({
   subsets: ['latin'],
@@ -29,6 +31,7 @@ export default function RootLayout({
       <body className={baloo_2.className && roboto.className}>
         <CartContextProvider>
           <Header />
+          <ToastContainer />
           {children}
         </CartContextProvider>
       </body>

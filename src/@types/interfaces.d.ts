@@ -6,7 +6,7 @@ export interface BenefitsHeroProps {
   icon: HTMLElement<IconProps>
 }
 
-export interface CoffeeProductsCardsProps {
+export interface ProductProps {
   id: number
   imgPath: string
   label: string[]
@@ -16,5 +16,5 @@ export interface CoffeeProductsCardsProps {
 }
 
 export interface ComponentCoffeeCardHomeProps {
-  item: CoffeeProductsCardsProps
+  item: ProductProps
 }
