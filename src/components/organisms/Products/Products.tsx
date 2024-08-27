@@ -123,12 +123,12 @@ const CoffeeProductsCards: ProductProps[] = [
 
 export default function Products() {
   return (
-    <section className="bg-base-50 w-full items-start flex flex-col justify-center px-40 py-8 gap-14">
+    <section className="bg-base-50 w-full items-start flex flex-col justify-center px-20 py-8 gap-14">
       <h1 className="font-bold font-baloo text-base-800 text-3xl">
         Nossos cafés
       </h1>
 
-      <div className="flex items-center justify-start gap-x-14 gap-y-10 flex-wrap">
+      <div className="grid grid-cols-4 items-center justify-center w-full gap-8">
         {CoffeeProductsCards.map((item) => (
           <CoffeeCardHome key={item.id} item={item} />
         ))}
