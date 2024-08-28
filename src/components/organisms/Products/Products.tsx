@@ -1,4 +1,7 @@
+'use client'
+
 import { ProductProps } from '@/@types/interfaces'
+import { baloo_2 } from '@/app/layout'
 import CoffeeCardHome from '@/components/molecules/CoffeeCardHome/CoffeeCardHome'
 import React from 'react'
 
@@ -124,7 +127,7 @@ const CoffeeProductsCards: ProductProps[] = [
 export default function Products() {
   return (
     <section className="bg-base-50 w-full items-start flex flex-col justify-center px-20 py-8 gap-14">
-      <h1 className="font-bold font-baloo text-base-800 text-3xl">
+      <h1 className={`font-bold ${baloo_2.className} text-base-800 text-3xl`}>
         Nossos cafés
       </h1>
 

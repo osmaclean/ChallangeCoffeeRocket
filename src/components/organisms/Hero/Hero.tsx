@@ -2,8 +2,8 @@
 
 import { BenefitsHeroProps } from '@/@types/interfaces'
 import { baloo_2 } from '@/app/layout'
-import Image from 'next/image'
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+import Image from 'next/image'
 import React from 'react'
 
 const benefitsBox1st: BenefitsHeroProps[] = [

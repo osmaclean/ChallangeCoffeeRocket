@@ -7,3 +7,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:focus {
+  outline: 0;
+  border: 1px solid #D7D5D5;
+}

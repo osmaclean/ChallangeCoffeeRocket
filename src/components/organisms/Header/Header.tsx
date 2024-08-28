@@ -16,8 +16,8 @@ export default function Header() {
         <Image
           alt="Logo Coffee Icon"
           src={'/logo.png'}
-          height={40}
-          width={85}
+          height={340}
+          width={160}
           className="w-20"
         />
       </Link>
