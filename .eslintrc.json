@@ -1,3 +1,10 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "@zeustech/eslint-config/next", 
+    "next/core-web-vitals"
+  ],
+  "rules": {
+    "camelcase": "off",
+    "no-case-declarations": "off"
+  }
 }
