@@ -4,7 +4,7 @@ import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { ComponentCoffeeCardHomeProps, Product } from '@/@types/interfaces'
 import { CartContext } from '@/context/CartContext'
 import { toast, Zoom } from 'react-toastify'
-import { baloo_2 } from '@/app/layout'
+import { baloo_2 } from '@/@fonts/fonts'
 import React, { useCallback, useContext, useState } from 'react'
 import Image from 'next/image'
 
