@@ -1,6 +1,6 @@
 'use client'
 
-import { baloo_2 } from '@/app/layout'
+import { baloo_2 } from '@/@fonts/fonts'
 import { useForm } from 'react-hook-form'
 import { useCallback, useContext } from 'react'
 import { CartContext } from '@/context/CartContext'

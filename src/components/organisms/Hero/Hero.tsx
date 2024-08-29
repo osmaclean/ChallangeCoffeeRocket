@@ -1,8 +1,8 @@
 'use client'
 
 import { BenefitsHeroProps } from '@/@types/interfaces'
-import { baloo_2 } from '@/app/layout'
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+import { baloo_2 } from '@/@fonts/fonts'
 import Image from 'next/image'
 import React from 'react'
 
