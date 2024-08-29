@@ -1,8 +1,9 @@
 'use client'
 
 import { BenefitsHeroProps } from '@/@types/interfaces'
-import Image from 'next/image'
+import { baloo_2 } from '@/app/layout'
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+import Image from 'next/image'
 import React from 'react'
 
 const benefitsBox1st: BenefitsHeroProps[] = [
@@ -33,9 +34,9 @@ const benefitsBox2nd: BenefitsHeroProps[] = [
 
 export default function Hero() {
   return (
-    <section className="bg-base-50 w-full items-center flex justify-between px-40 py-24 text-2xl">
+    <section className="bg-base-50 w-full items-center flex justify-between px-20 py-24 text-2xl">
       <div className="flex items-start justify-center flex-col w-[51%] gap-4">
-        <h1 className="font-bold font-baloo text-4xl">
+        <h1 className={`font-bold text-5xl ${baloo_2.className}`}>
           Encontre o café perfeito para qualquer hora do dia
         </h1>
 

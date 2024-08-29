@@ -1,15 +1,18 @@
-import { CoffeeProductsCardsProps } from '@/@types/interfaces'
+'use client'
+
+import { ProductProps } from '@/@types/interfaces'
+import { baloo_2 } from '@/app/layout'
 import CoffeeCardHome from '@/components/molecules/CoffeeCardHome/CoffeeCardHome'
 import React from 'react'
 
-const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
+const CoffeeProductsCards: ProductProps[] = [
   {
     id: 1,
     imgPath: '/coffee/coffee1.png',
     label: ['Tradicional'],
     name: 'Expresso Tradicional',
     description: 'O tradicional café feito com água quente e grãos moídos',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 2,
@@ -17,7 +20,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     label: ['Tradicional'],
     name: 'Expresso Americano',
     description: 'Expresso diluído, menos intenso que o tradicional',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 3,
@@ -25,7 +28,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     label: ['Tradicional'],
     name: 'Expresso Cremoso',
     description: 'Café expresso tradicional com espuma cremosa',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 4,
@@ -33,7 +36,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     label: ['Tradicional', 'Gelado'],
     name: 'Expresso Gelado',
     description: 'Bebida preparada com café expresso e cubos de gelo',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 5,
@@ -41,7 +44,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     label: ['Tradicional', 'com leite'],
     name: 'Café com Leite',
     description: 'Meio a meio de expresso tradicional com leite vaporizado',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 6,
@@ -50,7 +53,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     name: 'Latte',
     description:
       'Uma dose de café expresso com o dobro de leite e espuma cremosa',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 7,
@@ -59,7 +62,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     name: 'Capuccino',
     description:
       'Bebida com canela feita de doses iguais de café, leite e espuma',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 8,
@@ -68,7 +71,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     name: 'Macchiato',
     description:
       'Café expresso misturado com um pouco de leite quente e espuma',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 9,
@@ -76,7 +79,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     label: ['Tradicional', 'com leite'],
     name: 'Mocaccino',
     description: 'Café expresso com calda de chocolate, pouco leite e espuma',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 10,
@@ -84,7 +87,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     label: ['especial', 'com leite'],
     name: 'Chocolate Quente',
     description: 'Bebida feita com chocolate dissolvido no leite quente e café',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 11,
@@ -93,7 +96,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     name: 'Cubano',
     description:
       'Drink gelado de café expresso com rum, creme de leite e hortelã',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 12,
@@ -101,7 +104,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     label: ['especial'],
     name: 'Havaiano',
     description: 'Bebida adocicada preparada com café e leite de coco',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 13,
@@ -109,7 +112,7 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     label: ['especial'],
     name: 'Árabe',
     description: 'Bebida preparada com grãos de café árabe e especiarias',
-    price: '9,90',
+    price: 9.9,
   },
   {
     id: 14,
@@ -117,18 +120,18 @@ const CoffeeProductsCards: CoffeeProductsCardsProps[] = [
     label: ['especial', 'alcoólico'],
     name: 'Irlandês',
     description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
-    price: '9,90',
+    price: 9.9,
   },
 ]
 
 export default function Products() {
   return (
-    <section className="bg-base-50 w-full items-start flex flex-col justify-center px-40 py-8 gap-14">
-      <h1 className="font-bold font-baloo text-base-800 text-3xl">
+    <section className="bg-base-50 w-full items-start flex flex-col justify-center px-20 py-8 gap-14">
+      <h1 className={`font-bold ${baloo_2.className} text-base-800 text-3xl`}>
         Nossos cafés
       </h1>
 
-      <div className="flex items-center justify-start gap-x-14 gap-y-10 flex-wrap">
+      <div className="grid grid-cols-4 items-center justify-center w-full gap-8">
         {CoffeeProductsCards.map((item) => (
           <CoffeeCardHome key={item.id} item={item} />
         ))}

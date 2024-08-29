@@ -1,23 +1,59 @@
 'use client'
 
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { ComponentCoffeeCardHomeProps } from '@/@types/interfaces'
+import { ComponentCoffeeCardHomeProps, Product } from '@/@types/interfaces'
+import { CartContext } from '@/context/CartContext'
+import { toast, Zoom } from 'react-toastify'
+import { baloo_2 } from '@/app/layout'
+import React, { useCallback, useContext, useState } from 'react'
 import Image from 'next/image'
-import React, { useState } from 'react'
 
 export default function CoffeeCardHome({ item }: ComponentCoffeeCardHomeProps) {
-  const [count, setCount] = useState<number>(1)
+  const { cartItems, addItemToCart, updateCartItemQty } =
+    useContext(CartContext)
 
-  const handleIncrement = () => {
-    setCount((prevCount) => prevCount + 1)
-  }
+  const [count, setCount] = useState<number>(0)
+
+  const notify = useCallback((message: string, type: 'success' | 'error') => {
+    toast[type](message, {
+      position: 'bottom-right',
+      autoClose: 5000,
+      closeOnClick: true,
+      draggable: true,
+      theme: 'light',
+      transition: Zoom,
+    })
+  }, [])
+
+  const handleIncrement = () => setCount((prevCount) => prevCount + 1)
 
   const handleDecrement = () => {
-    if (count > 1) setCount((prevCount) => prevCount - 1)
+    if (count > 0) setCount((prevCount) => prevCount - 1)
   }
 
+  const addToCart = () => {
+    const product: Product = {
+      id: item.id,
+      name: item.name,
+      img_path: item.imgPath,
+      qty: count,
+      price: Number(item.price),
+    }
+
+    const productFiltered = cartItems.find((coffee) => coffee.id === item.id)
+
+    if (productFiltered) {
+      updateCartItemQty(item.id, productFiltered.qty + count)
+      setCount(0)
+      notify('Carrinho atualizado com sucesso', 'success')
+    } else {
+      addItemToCart(product)
+      setCount(0)
+      notify('Item adicionado ao carrinho', 'success')
+    }
+  }
   return (
-    <section className="w-[17rem] bg-base-200 p-5 rounded-tr-[2.25rem] rounded-tl-md rounded-br-md rounded-bl-[2.25rem] flex items-center justify-center flex-col gap-4">
+    <section className="w-[16rem] bg-base-200 p-5 rounded-tr-[2.25rem] rounded-tl-md rounded-br-md rounded-bl-[2.25rem] flex items-center justify-center flex-col gap-4">
       <div className="flex-col flex items-center justify-center gap-3">
         <Image
           src={item.imgPath}
@@ -40,7 +76,9 @@ export default function CoffeeCardHome({ item }: ComponentCoffeeCardHomeProps) {
 
       <div className="flex flex-col items-center justify-center gap-8">
         <div className="flex flex-col text-center items-center justify-center gap-2">
-          <h5 className="font-baloo font-extrabold text-base-800 text-xl">
+          <h5
+            className={`${baloo_2.className} font-extrabold text-base-800 text-xl`}
+          >
             {item.name}
           </h5>
           <p className="font-roboto font-normal text-sm text-base-600">
@@ -51,7 +89,7 @@ export default function CoffeeCardHome({ item }: ComponentCoffeeCardHomeProps) {
         <div className="flex items-center justify-center gap-6 w-full">
           <span className="font-normal font-roboto text-sm text-base-700">
             R${' '}
-            <strong className="font-baloo text-2xl font-extrabold">
+            <strong className={`${baloo_2.className} text-2xl font-extrabold`}>
               {item.price}
             </strong>
           </span>
@@ -79,6 +117,7 @@ export default function CoffeeCardHome({ item }: ComponentCoffeeCardHomeProps) {
 
             <button
               type="button"
+              onClick={addToCart}
               className="p-2 flex items-center justify-center text-base-50 bg-secondary-100 border-2 border-secondary-100 rounded-md"
             >
               <ShoppingCart size={20} weight="fill" />
