@@ -1,24 +1,12 @@
 'use client'
 
-import { Baloo_2, Roboto } from 'next/font/google'
 import { CartContextProvider } from '@/context/CartContext'
 import { ToastContainer } from 'react-toastify'
+import { FormContextProvider } from '@/context/FormContext'
+import { roboto } from '@/@fonts/fonts'
 import Header from '@/components/organisms/Header/Header'
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
-import { FormContextProvider } from '@/context/FormContext'
-
-export const baloo_2 = Baloo_2({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  preload: true,
-})
-
-const roboto = Roboto({
-  subsets: ['greek'],
-  weight: ['100', '900', '300', '400', '500', '700'],
-  preload: true,
-})
 
 export default function RootLayout({
   children,

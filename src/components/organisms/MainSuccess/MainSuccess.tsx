@@ -1,6 +1,6 @@
 'use client'
 
-import { baloo_2 } from '@/app/layout'
+import { baloo_2 } from '@/@fonts/fonts'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import React, { useContext } from 'react'
 import Image from 'next/image'

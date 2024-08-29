@@ -1,7 +1,7 @@
 'use client'
 
 import { ProductProps } from '@/@types/interfaces'
-import { baloo_2 } from '@/app/layout'
+import { baloo_2 } from '@/@fonts/fonts'
 import CoffeeCardHome from '@/components/molecules/CoffeeCardHome/CoffeeCardHome'
 import React from 'react'
 
