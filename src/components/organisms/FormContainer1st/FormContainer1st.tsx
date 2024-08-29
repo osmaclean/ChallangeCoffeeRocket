@@ -1,9 +1,10 @@
 import { MapPinLine } from 'phosphor-react'
-import { FieldValues, UseFormRegister } from 'react-hook-form'
+import { UseFormRegister } from 'react-hook-form'
+import { NewPurchaseFormInputs } from '../MainCheckout/MainCheckout'
 
 interface SubmittingProps {
   isSubmitting: boolean
-  register: UseFormRegister<FieldValues>
+  register: UseFormRegister<NewPurchaseFormInputs>
 }
 
 export default function FormContainer1st({
@@ -78,7 +79,6 @@ export default function FormContainer1st({
               type="text"
               className={`w-full text-base-900 disabled:cursor-not-allowed disabled:opacity-80 placeholder:text-base-600 border pr-20 pl-3 py-2 rounded-sm bg-base-300 border-base-400`}
               placeholder="Complemento"
-              required
               disabled={isSubmitting}
               {...register('complement')}
             />

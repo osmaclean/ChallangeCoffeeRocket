@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify'
 import Header from '@/components/organisms/Header/Header'
 import './globals.css'
 import 'react-toastify/dist/ReactToastify.css'
+import { FormContextProvider } from '@/context/FormContext'
 
 export const baloo_2 = Baloo_2({
   subsets: ['latin'],
@@ -26,11 +27,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>Coffee Shop</title>
+      </head>
       <body className={`${roboto.className} max-w-[1280px] m-auto`}>
         <CartContextProvider>
-          <ToastContainer />
-          <Header />
-          {children}
+          <FormContextProvider>
+            <ToastContainer />
+            <Header />
+            {children}
+          </FormContextProvider>
         </CartContextProvider>
       </body>
     </html>

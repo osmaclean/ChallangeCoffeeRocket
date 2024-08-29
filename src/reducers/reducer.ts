@@ -1,12 +1,5 @@
+import { Product } from '@/@types/interfaces'
 import { ActionTypes } from './actions'
-
-export interface Product {
-  id: number
-  name: string
-  img_path: string
-  price: number
-  qty: number
-}
 
 export interface CartProductsStateProps {
   cartItems: Product[]

@@ -1,9 +1,8 @@
 'use client'
 
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { ComponentCoffeeCardHomeProps } from '@/@types/interfaces'
+import { ComponentCoffeeCardHomeProps, Product } from '@/@types/interfaces'
 import { CartContext } from '@/context/CartContext'
-import { Product } from '@/reducers/reducer'
 import { toast, Zoom } from 'react-toastify'
 import { baloo_2 } from '@/app/layout'
 import React, { useCallback, useContext, useState } from 'react'

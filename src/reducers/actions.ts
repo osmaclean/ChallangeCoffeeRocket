@@ -1,4 +1,4 @@
-import { Product } from './reducer'
+import { Product } from '@/@types/interfaces'
 
 export enum ActionTypes {
   ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART',
@@ -37,6 +37,6 @@ export function updateCartAction(item_id: number, item_qty: number) {
 
 export function clearCartAction() {
   return {
-    type: ActionTypes.REMOVE_ITEM_TO_CART,
+    type: ActionTypes.CLEAR_CART,
   }
 }

@@ -14,7 +14,8 @@ import {
   removeItemToCartAction,
   updateCartAction,
 } from '../reducers/actions'
-import { cartManager, Product } from '../reducers/reducer'
+import { cartManager } from '../reducers/reducer'
+import { Product } from '@/@types/interfaces'
 
 interface ContextProps {
   cartItems: Product[]
@@ -41,8 +42,8 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
 
   const addItemToCart = (item: Product) => dispatch(addItemToCartAction(item))
 
-  const removeItemFromCart = (itemId: number) =>
-    dispatch(removeItemToCartAction(itemId))
+  const removeItemFromCart = (item_id: number) =>
+    dispatch(removeItemToCartAction(item_id))
 
   const updateCartItemQty = (itemId: number, itemQty: number) =>
     dispatch(updateCartAction(itemId, itemQty))

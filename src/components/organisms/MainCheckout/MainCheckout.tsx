@@ -2,36 +2,93 @@
 
 import { baloo_2 } from '@/app/layout'
 import { useForm } from 'react-hook-form'
-import { Fragment, useContext, useState } from 'react'
+import { useCallback, useContext } from 'react'
 import { CartContext } from '@/context/CartContext'
-import { Minus, Plus, Trash } from 'phosphor-react'
+import { FormContext, UserDataProps } from '@/context/FormContext'
+import { useRouter } from 'next/navigation'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { toast, Zoom } from 'react-toastify'
 import FormContainer1st from '../FormContainer1st/FormContainer1st'
 import FormContainer2nd from '../FormContainer2nd/FormContainer2nd'
-import Image from 'next/image'
+import CoffeeCard from '@/components/molecules/CoffeeCard/CoffeeCard'
+import * as z from 'zod'
+
+const newPurchaseFormSchema = z.object({
+  cep: z.string().min(8, 'CEP deve ter no mínimo 8 caracteres'),
+  street: z.string(),
+  number: z.string(),
+  complement: z.string().optional(),
+  neighborhood: z.string(),
+  city: z.string(),
+  uf: z.string().length(2, 'UF deve ter 2 caracteres'),
+  methodPayment: z
+    .string()
+    .min(1, 'Você precisa escolher um método de pagamento'),
+})
+
+export type NewPurchaseFormInputs = z.infer<typeof newPurchaseFormSchema>
 
 export default function MainCheckout() {
-  const { cartItems } = useContext(CartContext)
-  const [count, setCount] = useState<number>(0)
+  const { cartItems, deliveryCost, totalToPay, clearCart } =
+    useContext(CartContext)
+  const { handleFormOrder } = useContext(FormContext)
+  const { push } = useRouter()
+
+  const notify = useCallback((message: string, type: 'success' | 'error') => {
+    toast[type](message, {
+      position: 'bottom-right',
+      autoClose: 5000,
+      closeOnClick: true,
+      draggable: true,
+      theme: 'light',
+      transition: Zoom,
+    })
+  }, [])
+
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.qty * item.price,
+    0,
+  )
 
   const {
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
     handleSubmit,
     register,
-  } = useForm()
+    reset,
+    control,
+  } = useForm<NewPurchaseFormInputs>({
+    resolver: zodResolver(newPurchaseFormSchema),
+  })
 
-  const handleIncrement = () => setCount((prevCount) => prevCount + 1)
+  const onSubmit = (data: NewPurchaseFormInputs) => {
+    const formUsuario: UserDataProps = {
+      cep: data.cep,
+      street: data.street,
+      number: data.number,
+      complement: data.complement,
+      neighborhood: data.neighborhood,
+      city: data.city,
+      uf: data.uf,
+      methodPayment: data.methodPayment,
+    }
 
-  const handleDecrement = () => {
-    if (count > 0) setCount((prevCount) => prevCount - 1)
+    handleFormOrder(formUsuario)
+    reset()
+    clearCart()
+    notify('Pedido confirmado com sucesso!', 'success')
+    setTimeout(() => push('/success'), 3000)
   }
 
-  const onSubmit = () => {
-    console.log('Enviou!')
+  const onError = () => {
+    const firstErrorKey = Object.keys(errors)[0] as keyof typeof errors
+    const errorMessage = errors[firstErrorKey]?.message || 'Erro no formulário'
+
+    notify(errorMessage, 'error')
   }
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, onError)}
       className="bg-base-50 w-full items-start flex justify-between px-20 py-6 gap-8"
     >
       <div className="w-[60%] flex flex-col justify-center items-start gap-4">
@@ -40,99 +97,43 @@ export default function MainCheckout() {
         </h1>
         <div className="w-full flex flex-col items-center justify-center gap-3">
           <FormContainer1st isSubmitting={isSubmitting} register={register} />
-          <FormContainer2nd isSubmitting={isSubmitting} register={register} />
+          <FormContainer2nd control={control} />
         </div>
       </div>
       <div className="w-[40%] flex flex-col justify-center items-start gap-4">
         <h1 className={`font-bold ${baloo_2.className}`}>Cafés selecionados</h1>
 
         <section className="w-full flex flex-col items-center justify-center gap-6 bg-base-200 rounded-tl-md p-10 rounded-br-md rounded-tr-[48px] rounded-bl-[48px]">
-          {cartItems.map((item) => (
-            <Fragment key={item.name}>
-              <div className="flex w-full items-center justify-between">
-                <div className="flex w-[80%] items-center justify-start gap-5">
-                  <Image
-                    alt={'Image Coffee'}
-                    aria-label={'Image Coffee'}
-                    src={item.img_path}
-                    width={250}
-                    height={250}
-                    className="w-16"
-                  />
-                  <div className="flex w-full flex-col items-start justify-center gap-2">
-                    <h6>{item.name}</h6>
-                    <div className="flex w-full items-center justify-start gap-2">
-                      <div className="flex items-center justify-between bg-base-400 py-1 px-2 gap-2 rounded-md">
-                        <button
-                          type="button"
-                          className="border border-transparent"
-                        >
-                          <Minus
-                            size={14}
-                            onClick={handleDecrement}
-                            className="text-secondary-200 duration-300 hover:text-secondary-100"
-                          />
-                        </button>
-                        <span className="text-base font-normal text-base-900">
-                          {item.qty}
-                        </span>
-                        <button
-                          type="button"
-                          className="border border-transparent"
-                        >
-                          <Plus
-                            size={14}
-                            onClick={handleIncrement}
-                            className="text-secondary-200 duration-300 hover:text-secondary-100"
-                          />
-                        </button>
-                      </div>
-                      <div className="">
-                        <button
-                          type="button"
-                          className="text-xs uppercase hover:bg-base-500 bg-base-400 p-2 duration-300 hover:text-base-800 border border-transparent rounded-md w-full flex items-center text-base-700 justify-center gap-2"
-                        >
-                          <Trash
-                            size={16}
-                            onClick={handleDecrement}
-                            className="text-secondary-200"
-                          />
-                          remover
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex h-16 flex-1 items-center justify-center">
-                  <span className="h-full text-end w-full -mt-2 font-bold text-base-800">
-                    R$ {item.price}
-                  </span>
-                </div>
-              </div>
-              <div className="w-full h-[1px] bg-base-400"></div>
-            </Fragment>
-          ))}
-
           <div className="flex flex-col justify-center items-center w-full gap-3">
+            {cartItems.length > 0 ? (
+              cartItems.map((item) => {
+                return <CoffeeCard item={item} key={item.id} />
+              })
+            ) : (
+              <p className="flex justify-center text-sm text-base-600 p-6 font-medium uppercase">
+                Sem itens no carrinho!
+              </p>
+            )}
+
             <div className="w-full flex item justify-between text-base-700">
               <h4 className="text-sm">Total de itens</h4>
-              <h6 className="text-base">R$ 29,70</h6>
+              <h6 className="text-base">R$ {totalToPay.toFixed(2)}</h6>
             </div>
 
             <div className="w-full flex item justify-between text-base-700">
               <h4 className="text-sm">Entrega</h4>
-              <h6 className="text-base">R$ 3,50</h6>
+              <h6 className="text-base">R$ {deliveryCost.toFixed(2)}</h6>
             </div>
 
             <div className="w-full flex item justify-between text-base-800 text-xl font-bold">
               <h4>Total</h4>
-              <h6>R$ 33,20</h6>
+              <h6>R$ {totalPrice.toFixed(2)}</h6>
             </div>
           </div>
 
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || cartItems.length === 0}
             className="uppercase disabled:cursor-not-allowed disabled:opacity-70 text-base-50 text-sm font-bold w-full py-3 bg-primary-200 rounded-md"
           >
             confirmar pedido

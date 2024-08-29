@@ -12,9 +12,21 @@ export interface ProductProps {
   label: string[]
   name: string
   description: string
-  price: string
+  price: number
 }
 
 export interface ComponentCoffeeCardHomeProps {
   item: ProductProps
+}
+
+export interface Product {
+  id: number
+  name: string
+  img_path: string
+  price: number
+  qty: number
+}
+
+export interface ComponentCoffeeCardCheckoutProps {
+  item: Product
 }
