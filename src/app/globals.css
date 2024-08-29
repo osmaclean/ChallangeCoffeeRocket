@@ -7,3 +7,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:focus {
+  outline: 0;
+  border: 1px solid #D7D5D5;
+}
+
+.borderGradient {
+  background: linear-gradient(63deg, rgba(219,172,44,1) 0%, rgba(128,71,248,1) 100%);
+}
+
+.borderGradient .innerContent {
+  border-radius: inherit;
+}
